@@ -1,14 +1,10 @@
 #!/bin/bash
-#========================================================================================================================
-# https://github.com/ophub/amlogic-s9xxx-openwrt
-# Description: Automatically Build OpenWrt
-# Function: Diy script (Before Update feeds, Modify the default IP, hostname, theme, add/remove software packages, etc.)
-# Source code repository: https://github.com/immortalwrt/immortalwrt / Branch: master
-#========================================================================================================================
+# AX6S 专用插件源（安全稳定）
+sed -i '$a src-git istore https://github.com/linkease/istore;main' feeds.conf.default
+sed -i '$a src-git argon https://github.com/jerrykuku/luci-theme-argon;main' feeds.conf.default
+sed -i '$a src-git passwall2 https://github.com/xiaorouji/openwrt-passwall2;main' feeds.conf.default
+sed -i '$a src-git openclash https://github.com/vernesong/OpenClash;master' feeds.conf.default
 
-# Add a feed source
-# sed -i '$a src-git lienol https://github.com/Lienol/openwrt-package' feeds.conf.default
-
-# other
-# rm -rf package/emortal/{autosamba,ipv6-helper}
-
+# 更新并安装插件
+./scripts/feeds update -a
+./scripts/feeds install -a
